@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procure Trading, LLC — Global Procurement &amp; Trading Solutions</title>
+    <meta name="description" content="Procure Trading, LLC is a global procurement and import/export company specializing in auto parts, accessories, and industrial supplies. Sourcing from Asia with reliable logistics worldwide.">
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #2d2d2d;
+            line-height: 1.6;
+            background: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Colors ── */
+        :root {
+            --red: #D42027;
+            --red-dark: #B71C1C;
+            --red-light: #FFEBEE;
+            --gray-dark: #3a3a3a;
+            --gray-mid: #6b6b6b;
+            --gray-light: #f5f5f5;
+            --gray-border: #e0e0e0;
+            --accent-arc: #9e9e9e;
+        }
+
+        /* ── Typography ── */
+        h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; color: var(--gray-dark); }
+        h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+        h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 1rem; }
+        h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        p { color: var(--gray-mid); font-size: 1.05rem; }
+
+        /* ── Layout ── */
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 80px 0; }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-border);
+            z-index: 1000;
+            transition: box-shadow 0.3s ease;
+        }
+        nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            max-width: 1120px; margin: 0 auto; padding: 0 24px;
+            height: 70px;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo img { height: 42px; width: auto; }
+        .nav-logo span {
+            font-weight: 700; font-size: 1.15rem;
+            color: var(--red); letter-spacing: -0.02em;
+        }
+        .nav-logo .trading { color: var(--gray-mid); font-weight: 500; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--gray-mid);
+            font-weight: 500; font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--red); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .nav-toggle span {
+            display: block; width: 22px; height: 2px;
+            background: var(--gray-dark); margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(165deg, #ffffff 0%, var(--gray-light) 50%, #ffffff 100%);
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: -200px; right: -200px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212,32,39,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-content {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center;
+        }
+        .hero-text { position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-block;
+            background: var(--red-light); color: var(--red);
+            padding: 6px 16px; border-radius: 100px;
+            font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .hero h1 { margin-bottom: 20px; }
+        .hero h1 span { color: var(--red); }
+        .hero p { font-size: 1.15rem; margin-bottom: 32px; max-width: 480px; }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--red); color: #fff;
+            padding: 14px 32px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(212,32,39,0.3);
+        }
+        .hero-cta:hover {
+            background: var(--red-dark);
+            box-shadow: 0 6px 20px rgba(212,32,39,0.4);
+            transform: translateY(-1px);
+        }
+        .hero-visual {
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
+        }
+        .hero-stats {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 20px; max-width: 380px;
+        }
+        .stat-card {
+            background: #fff;
+            border: 1px solid var(--gray-border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+        .stat-number {
+            font-size: 2rem; font-weight: 800;
+            color: var(--red); display: block;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.85rem; color: var(--gray-mid);
+            margin-top: 6px; font-weight: 500;
+        }
+
+        /* ── About ── */
+        .about { background: #fff; }
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center;
+        }
+        .about-image {
+            background: var(--gray-light);
+            border-radius: 16px;
+            padding: 48px;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 320px;
+            border: 1px solid var(--gray-border);
+        }
+        .about-image img { max-width: 220px; }
+        .section-label {
+            display: inline-block;
+            color: var(--red); font-weight: 600;
+            font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 12px;
+        }
+        .about p { margin-bottom: 16px; }
+
+        /* ── Services ── */
+        .services { background: var(--gray-light); }
+        .services-header { text-align: center; margin-bottom: 56px; }
+        .services-header p { max-width: 560px; margin: 0 auto; }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .service-card {
+            background: #fff;
+            border: 1px solid var(--gray-border);
+            border-radius: 14px;
+            padding: 36px 28px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+        }
+        .service-icon {
+            width: 52px; height: 52px;
+            background: var(--red-light);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .service-card h3 { color: var(--gray-dark); }
+        .service-card p { font-size: 0.95rem; }
+
+        /* ── Products ── */
+        .products { background: #fff; }
+        .products-header { text-align: center; margin-bottom: 56px; }
+        .products-header p { max-width: 560px; margin: 0 auto; }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+        .product-card {
+            background: var(--gray-light);
+            border: 1px solid var(--gray-border);
+            border-radius: 14px;
+            padding: 40px 32px;
+            display: flex; align-items: flex-start; gap: 20px;
+        }
+        .product-icon {
+            width: 48px; height: 48px; min-width: 48px;
+            background: var(--red);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+        .product-card h3 { color: var(--gray-dark); margin-bottom: 8px; }
+        .product-card p { font-size: 0.95rem; }
+
+        /* ── Contact ── */
+        .contact {
+            background: var(--gray-dark);
+            color: #fff;
+        }
+        .contact-inner {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: start;
+        }
+        .contact h2 { color: #fff; }
+        .contact .section-label { color: #f87171; }
+        .contact p { color: rgba(255,255,255,0.7); }
+        .contact-info { margin-top: 32px; }
+        .contact-item {
+            display: flex; align-items: center; gap: 16px;
+            margin-bottom: 20px;
+        }
+        .contact-icon {
+            width: 44px; height: 44px; min-width: 44px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem;
+        }
+        .contact-item-text span {
+            display: block; font-size: 0.85rem;
+            color: rgba(255,255,255,0.5); margin-bottom: 2px;
+        }
+        .contact-item-text a,
+        .contact-item-text p {
+            color: #fff; text-decoration: none;
+            font-weight: 500; font-size: 1rem;
+        }
+        .contact-item-text a:hover { color: #f87171; }
+        .contact-form {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 36px;
+        }
+        .contact-form h3 { color: #fff; margin-bottom: 24px; font-size: 1.3rem; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: 0.85rem;
+            color: rgba(255,255,255,0.6); margin-bottom: 6px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%; padding: 12px 16px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            color: #fff; font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--red);
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-submit {
+            width: 100%;
+            background: var(--red); color: #fff;
+            padding: 14px; border: none; border-radius: 8px;
+            font-weight: 600; font-size: 1rem;
+            cursor: pointer; transition: background 0.2s;
+            font-family: inherit;
+        }
+        .form-submit:hover { background: var(--red-dark); }
+
+        /* ── Footer ── */
+        footer {
+            background: #2a2a2a;
+            padding: 32px 0;
+            text-align: center;
+        }
+        footer p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 900px) {
+            .hero-content { grid-template-columns: 1fr; gap: 40px; }
+            .hero-visual { order: -1; }
+            .hero-stats { max-width: 100%; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-image { order: -1; min-height: 200px; padding: 32px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: 1fr; }
+            .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+        }
+        @media (max-width: 640px) {
+            section { padding: 56px 0; }
+            .hero { padding: 120px 0 60px; }
+            .hero-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .stat-card { padding: 16px; }
+            .stat-number { font-size: 1.5rem; }
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            nav.open .nav-links {
+                display: flex; flex-direction: column;
+                position: absolute; top: 70px; left: 0; right: 0;
+                background: #fff; padding: 24px;
+                border-bottom: 1px solid var(--gray-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="images/logo.jpg" alt="Procure Trading Logo">
+                <span>PROCURE <span class="trading">TRADING</span></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">🌎 Global Procurement Specialists</div>
+                    <h1>Your Trusted Partner in <span>Global Trade</span></h1>
+                    <p>Procure Trading connects manufacturers worldwide with the U.S. market — delivering quality auto parts, accessories, and industrial supplies with reliable sourcing, logistics, and compliance.</p>
+                    <a href="#contact" class="hero-cta">
+                        Get In Touch
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <span class="stat-number">10+</span>
+                            <div class="stat-label">Years in Business</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">Global</span>
+                            <div class="stat-label">Supplier Network</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">B2B</span>
+                            <div class="stat-label">&amp; Retail Channels</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">USA</span>
+                            <div class="stat-label">Based Operations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="images/logo-full.jpg" alt="Procure Trading">
+                </div>
+                <div>
+                    <div class="section-label">About Us</div>
+                    <h2>Procurement Outsourcing Specialists</h2>
+                    <p>Procure Trading, LLC is a U.S.-based import/export company specializing in global procurement. We source quality products from trusted manufacturers in Asia and deliver them to businesses across the United States and Canada.</p>
+                    <p>With deep expertise in international trade, customs compliance, and freight logistics, we simplify the complexities of global sourcing so our partners can focus on what they do best — growing their business.</p>
+                    <p>From product sourcing to last-mile delivery, we manage every step of the supply chain with precision and transparency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="services-header">
+                <div class="section-label">What We Do</div>
+                <h2>End-to-End Trade Solutions</h2>
+                <p>We handle the entire procurement lifecycle — from finding the right supplier to delivering products to your door.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Global Sourcing</h3>
+                    <p>We identify and vet manufacturers across Asia to find the best quality products at competitive prices for your business needs.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚢</div>
+                    <h3>Freight &amp; Logistics</h3>
+                    <p>Full-service freight management including ocean shipping, air freight, customs brokerage, and last-mile delivery coordination.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Customs &amp; Compliance</h3>
+                    <p>Navigate tariffs, duties, and trade regulations with confidence. We handle all documentation and ensure full compliance.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✅</div>
+                    <h3>Quality Control</h3>
+                    <p>Rigorous inspection and quality assurance protocols at the source ensure every shipment meets your standards before it ships.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>Warehouse &amp; Distribution</h3>
+                    <p>Inventory management, FBA prep, and distribution services to get your products market-ready and in the hands of customers.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Vendor Management</h3>
+                    <p>Ongoing supplier relationship management, price negotiation, and supply chain optimization to maximize your margins.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="products-header">
+                <div class="section-label">Our Products</div>
+                <h2>Quality Products, Global Reach</h2>
+                <p>We specialize in sourcing and distributing automotive parts, accessories, and industrial supplies.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">🔧</div>
+                    <div>
+                        <h3>Auto Parts &amp; Accessories</h3>
+                        <p>Tire pressure gauges, air chucks, valves, and precision automotive accessories sourced from top manufacturers.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🏔️</div>
+                    <div>
+                        <h3>Staun Tire Deflators</h3>
+                        <p>The original automatic tire deflators — trusted by off-road enthusiasts worldwide for reliable, hands-free tire pressure adjustment.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🏭</div>
+                    <div>
+                        <h3>Air Tools &amp; Equipment</h3>
+                        <p>Professional-grade pneumatic tools and air-powered equipment for industrial and commercial applications.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">📦</div>
+                    <div>
+                        <h3>Private Label &amp; Custom Sourcing</h3>
+                        <p>Custom product sourcing and private label solutions tailored to your brand specifications and market requirements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-inner">
+                <div>
+                    <div class="section-label">Contact Us</div>
+                    <h2>Let's Work Together</h2>
+                    <p>Whether you're looking for a reliable sourcing partner or need help navigating international trade, we're here to help.</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-item-text">
+                                <span>Email</span>
+                                <a href="mailto:info@procuretrading.com">info@procuretrading.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🌐</div>
+                            <div class="contact-item-text">
+                                <span>Website</span>
+                                <a href="https://procuretrading.com">procuretrading.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-item-text">
+                                <span>Location</span>
+                                <p>United States</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form action="https://formspree.io/f/your-form-id" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Smith">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="john@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required placeholder="Tell us about your sourcing needs..."></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Procure Trading, LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        navToggle.addEventListener('click', () => {
+            navbar.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('open');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const position = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top: position, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
