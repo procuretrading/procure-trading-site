@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procure Trading — Wholesale Product Catalog 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #ebebeb;
+      color: #1a1a1a;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 56px;
+    }
+
+    .site-header img.logo {
+      height: 72px;
+    }
+
+    .header-right {
+      text-align: right;
+    }
+
+    .header-right h1 {
+      color: #111;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .header-right .tagline {
+      color: #888;
+      font-size: 12px;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    /* ── Intro bar ── */
+    .intro-bar {
+      background: #c0392b;
+      padding: 18px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .intro-bar p {
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.7;
+      max-width: 680px;
+    }
+
+    .intro-bar .contact-block {
+      text-align: right;
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      white-space: nowrap;
+      line-height: 1.8;
+    }
+
+    .intro-bar .contact-block strong {
+      color: #fff;
+      display: block;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    /* ── Main layout ── */
+    .catalog-body {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Section header ── */
+    .section-block {
+      margin-bottom: 40px;
+    }
+
+    .section-block + .section-block {
+      margin-top: 64px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .section-label-inner {
+      white-space: nowrap;
+    }
+
+    .section-brand {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c0392b;
+    }
+
+    .section-name {
+      font-size: 26px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.1;
+    }
+
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: #ccc;
+    }
+
+    /* ── Product grid ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .product-grid.wide {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* ── Product card ── */
+    .product-card {
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .product-image-wrap {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      min-height: 260px;
+      position: relative;
+    }
+
+    .product-image-wrap img {
+      max-height: 210px;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .pack-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #c0392b;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 3px;
+    }
+
+    /* ── Card body ── */
+    .product-body {
+      padding: 20px 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-series-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 9px;
+    }
+
+    .series-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 3px;
+    }
+
+    .tag-platinum {
+      background: #e8e8e8;
+      color: #444;
+      border: 1px solid #ccc;
+    }
+
+    .tag-premium {
+      background: #4a3500;
+      color: #daa520;
+    }
+
+    .tag-extension {
+      background: #1a3a5c;
+      color: #7eb8f7;
+    }
+
+    .tag-adapter {
+      background: #1a3a28;
+      color: #5cd4a0;
+    }
+
+    .tag-deflator {
+      background: #3a1a00;
+      color: #c89060;
+    }
+
+    .tag-skog {
+      background: #111;
+      color: #fff;
+    }
+
+    .tag-staun {
+      background: #5c4033;
+      color: #e8c9a0;
+    }
+
+    .product-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .product-desc {
+      font-size: 12.5px;
+      color: #555;
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+
+    .product-desc ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .product-desc li {
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 3px;
+    }
+
+    .product-desc li::before {
+      content: "▸";
+      color: #c0392b;
+      position: absolute;
+      left: 0;
+      font-size: 10px;
+      top: 2px;
+    }
+
+    /* ── Card footer ── */
+    .product-footer {
+      border-top: 1px solid #f0f0f0;
+      padding-top: 14px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .product-meta {
+      font-size: 10.5px;
+      color: #aaa;
+      line-height: 1.7;
+    }
+
+    .price-block {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #aaa;
+      display: block;
+      margin-bottom: 1px;
+    }
+
+    .price-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1;
+    }
+
+    .price-na {
+      font-size: 13px;
+      font-weight: 600;
+      color: #bbb;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      background: #111;
+      color: #555;
+      text-align: center;
+      padding: 24px;
+      font-size: 11px;
+      margin-top: 0;
+    }
+
+    .site-footer a { color: #c0392b; text-decoration: none; }
+
+    .reg {
+      font-size: 0.55em;
+      vertical-align: super;
+      font-weight: normal;
+      letter-spacing: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="site-header">
+  <img class="logo" src="images/logo.png" alt="Procure Trading" />
+  <div class="header-right">
+    <h1>Wholesale Product Catalog</h1>
+    <p class="tagline">Confidential — For Distributor Review Only &nbsp;|&nbsp; May 2026</p>
+  </div>
+</header>
+
+<!-- ══════════════ INTRO ══════════════ -->
+<div class="intro-bar">
+  <p>
+    Procure Trading LLC is the exclusive US distributor for <strong>SKÖG</strong> and <strong>STAUN</strong> brand products —
+    premium tire inflation and deflation accessories. All items are sold on Amazon.com.
+    Pricing shown reflects current Amazon retail. Distributor pricing will be provided separately.
+  </p>
+  <div class="contact-block">
+    <strong>Contact</strong>
+    Todd McMichael<br />
+    <a href="mailto:todd@procuretrading.com" style="color:#ffb3b3;">todd@procuretrading.com</a><br />
+    Procure Trading LLC
+  </div>
+</div>
+
+<!-- ══════════════ CATALOG BODY ══════════════ -->
+<div class="catalog-body">
+
+
+  <!-- ─── SECTION: Platinum Series ─── -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-label-inner">
+        <div class="section-brand">SKÖG</div>
+        <div class="section-name">Chuck Mates<sup class="reg">®</sup> Platinum Series</div>
+      </div>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="product-grid wide">
+
+      <!-- Platinum Open 1PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/CM Platinum MainMain Image Blister 31MAY25 MainMain RED.png" alt="Chuck Mates Platinum Open Flow 1PK" />
+          <span class="pack-badge">1-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-platinum">Platinum</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Platinum Speed Clip<br/>Open Flow — 8V1 Schrader</div>
+          <div class="product-desc">
+            <ul>
+              <li>Patented open-flow design for rapid inflation</li>
+              <li>Ratchet Seal™ airtight locking mechanism</li>
+              <li>Polished chrome finish, CNC machined</li>
+              <li>8V1 Schrader valve fitting</li>
+              <li>Retail blister pack included</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0F9B1ZKJP</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$18.28</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platinum Open 2PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/CM Platinum MainMain Image Blister 31MAY25 MainMain RED 2PK B0F9B28GMN.png" alt="Chuck Mates Platinum Open Flow 2PK" />
+          <span class="pack-badge">2-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-platinum">Platinum</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Platinum Speed Clip<br/>Open Flow — 8V1 Schrader</div>
+          <div class="product-desc">
+            <ul>
+              <li>Two-pack value bundle</li>
+              <li>Patented open-flow design for rapid inflation</li>
+              <li>Ratchet Seal™ airtight locking mechanism</li>
+              <li>Polished chrome finish, CNC machined</li>
+              <li>8V1 Schrader valve fitting</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0F9B28GMN</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$28.99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platinum F-NPT Open 1PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/CM Platinum NPT OPEN mainmain 13APR26 B0GM1QCQC1.png" alt="Chuck Mates Platinum 1/4 F-NPT Open Flow 1PK" />
+          <span class="pack-badge">1-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-platinum">Platinum</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Platinum Speed Clip<br/>Open Flow — 1/4" F-NPT</div>
+          <div class="product-desc">
+            <ul>
+              <li>Open-flow, 1/4" Female NPT fitting</li>
+              <li>Includes 8mm adapter for portable inflators</li>
+              <li>Ratchet Seal™ airtight locking mechanism</li>
+              <li>Polished chrome finish, CNC machined</li>
+              <li>Trigger-type or portable inflator compatible</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0GM1QCQC1</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$24.99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platinum NPT Closed 1PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/08JAN26 CM NPT CLOSED MainMain Polish.png" alt="Chuck Mates Platinum 1/4 NPT Closed Flow 1PK" />
+          <span class="pack-badge">1-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-platinum">Platinum</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Platinum Speed Clip<br/>Closed Flow — 1/4" NPT</div>
+          <div class="product-desc">
+            <ul>
+              <li>Closed-flow — air only flows when attached to valve</li>
+              <li>1/4" NPT male fitting</li>
+              <li>Ratchet Seal™ airtight locking mechanism</li>
+              <li>Polished chrome finish, CNC machined</li>
+              <li>Leak-free patented design</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0FNKH13BL</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$24.98</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /product-grid wide -->
+  </div><!-- /section Platinum -->
+
+
+  <!-- ─── SECTION: Premium Series ─── -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-label-inner">
+        <div class="section-brand">SKÖG</div>
+        <div class="section-name">Chuck Mates<sup class="reg">®</sup> Premium Series</div>
+      </div>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="product-grid wide">
+
+      <!-- Premium Open 1PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/Chuck Mate 10JAN26 Premium B0CYDXGGH2 mainmain  1PK.png" alt="Chuck Mates Premium Open Flow 1PK" />
+          <span class="pack-badge">1-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-premium">Premium</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Premium Speed Clip<br/>Open Flow — 8V1 Schrader</div>
+          <div class="product-desc">
+            <ul>
+              <li>Open-flow brass construction</li>
+              <li>Lever-lock attachment mechanism</li>
+              <li>8V1 Schrader valve fitting</li>
+              <li>Durable heavy-duty brass body</li>
+              <li>Entry-level price, high value</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0CYDXGGH2</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$14.99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium Open 2PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/Chuck Mate 10JAN26 Premium B0DC4PWX4H mainmain 2PK.png" alt="Chuck Mates Premium Open Flow 2PK" />
+          <span class="pack-badge">2-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-premium">Premium</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Premium Speed Clip<br/>Open Flow — 8V1 Schrader</div>
+          <div class="product-desc">
+            <ul>
+              <li>Two-pack value bundle</li>
+              <li>Open-flow brass construction</li>
+              <li>Lever-lock attachment mechanism</li>
+              <li>8V1 Schrader valve fitting</li>
+              <li>Ideal for fleet and shop use</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0DC4PWX4H</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$24.98</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium NPT Closed 1PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/CM Premium 10JAN26 NPT MainMain 1PK B0F2JNH29G FNPT.png" alt="Chuck Mates Premium NPT Closed Flow 1PK" />
+          <span class="pack-badge">1-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-premium">Premium</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Premium Speed Clip<br/>Closed Flow — 1/4" F-NPT</div>
+          <div class="product-desc">
+            <ul>
+              <li>Closed-flow — air only flows when attached</li>
+              <li>8V1 Schrader to 1/4" Female NPT</li>
+              <li>Heavy-duty brass body</li>
+              <li>Lever-lock attachment mechanism</li>
+              <li>No air loss when connecting</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0F2JNH29G</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$14.99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium NPT Closed 2PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/CM Premium 10JAN26 NPT MainMain 2PK GPTPolish  B0F2JQ15B3 FNPT.png" alt="Chuck Mates Premium NPT Closed Flow 2PK" />
+          <span class="pack-badge">2-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-premium">Premium</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Premium Speed Clip<br/>Closed Flow — 1/4" F-NPT</div>
+          <div class="product-desc">
+            <ul>
+              <li>Two-pack value bundle</li>
+              <li>Closed-flow — air only flows when attached</li>
+              <li>8V1 Schrader to 1/4" Female NPT</li>
+              <li>Heavy-duty brass body</li>
+              <li>No air loss when connecting</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0F2JQ15B3</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$23.99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /product-grid wide -->
+  </div><!-- /section Premium -->
+
+
+  <!-- ─── SECTION: Extensions ─── -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-label-inner">
+        <div class="section-brand">SKÖG</div>
+        <div class="section-name">Chuck Mates<sup class="reg">®</sup> Extensions</div>
+      </div>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- Reach360 Extension -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/Chuck Mate RoboArm Platinum MainMain Image 25DEC25 Reflection.png" alt="Chuck Mates Reach360 Extension 7-inch" />
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-extension">Extension</span>
+            <span class="series-tag tag-platinum">Platinum</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Reach360™<br/>Articulating 7" Extension</div>
+          <div class="product-desc">
+            <ul>
+              <li>7" articulating arm for recessed valve stems</li>
+              <li>Ratchet Seal™ self-locking head</li>
+              <li>1/4" F-NPT and Schrader connections included</li>
+              <li>Chrome-plated brass construction</li>
+              <li>Dually trucks, RV, bicycle, car, semi</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0F99YM7V3</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$32.98</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flex360 Extension -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/FLEX360 main 200x225 APLUS 13MAY26.png" alt="Chuck Mates Flex360 Extension 7-inch" />
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-extension">Extension</span>
+          </div>
+          <div class="product-name">Chuck Mates<sup class="reg">®</sup> Flex360™<br/>7" Hose Extension</div>
+          <div class="product-desc">
+            <ul>
+              <li>7" flexible hose for hard-to-reach valve stems</li>
+              <li>Open-flow speed clip with Ratchet Seal™</li>
+              <li>Compatible with portable tire inflators</li>
+              <li>Bends to any angle — no awkward positions</li>
+              <li>Patented self-locking chuck</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0GQWJF9VK</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$24.99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /product-grid -->
+  </div><!-- /section Extensions -->
+
+
+  <!-- ─── SECTION: Adapter ─── -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-label-inner">
+        <div class="section-brand">SKÖG</div>
+        <div class="section-name">Self-Sealing Adapter</div>
+      </div>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- Adapter 1PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/Abracadapter Main MainMain 30DEC25.png" alt="SKÖG Self-Sealing Adapter 1PK" />
+          <span class="pack-badge">1-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-adapter">Adapter</span>
+          </div>
+          <div class="product-name">SKÖG Self-Sealing Adapter<br/>8V1 Schrader → 1/4" M-NPT</div>
+          <div class="product-desc">
+            <ul>
+              <li>Converts any tire inflator to 1/4" M-NPT</li>
+              <li>Self-sealing O-ring — no Teflon tape required</li>
+              <li>CNC machined stainless steel</li>
+              <li>Permanent airtight seal on first installation</li>
+              <li>Works with all standard 8V1 Schrader inflators</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0FBKJ5XRC</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$10.95</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adapter 2PK -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/Abracadapter Main MainMain 02JAN26 with teflon 2PK.png" alt="SKÖG Self-Sealing Adapter 2PK" />
+          <span class="pack-badge">2-Pack</span>
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-adapter">Adapter</span>
+          </div>
+          <div class="product-name">SKÖG Self-Sealing Adapter<br/>8V1 Schrader → 1/4" M-NPT</div>
+          <div class="product-desc">
+            <ul>
+              <li>Two-pack value bundle</li>
+              <li>Converts any tire inflator to 1/4" M-NPT</li>
+              <li>Self-sealing O-ring — no Teflon tape required</li>
+              <li>CNC machined stainless steel</li>
+              <li>Works with all standard 8V1 Schrader inflators</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0FBKFV3J5</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$14.95</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /product-grid -->
+  </div><!-- /section Adapter -->
+
+
+  <!-- ─── SECTION: Pressure Gauge ─── -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-label-inner">
+        <div class="section-brand">SKÖG</div>
+        <div class="section-name">Platinum Series Tire Pressure Gauge</div>
+      </div>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- S521 Pressure Gauge -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/PSI100 MainMain 07FEB26 noSKOG.png" alt="SKÖG Dual-Needle Tire Pressure Gauge 100 PSI" />
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-skog">SKÖG</span>
+            <span class="series-tag tag-platinum">Platinum</span>
+          </div>
+          <div class="product-name">SKÖG Dual-Needle Tire Pressure Gauge<br/>100 PSI — Platinum Series</div>
+          <div class="product-desc">
+            <ul>
+              <li>Dual-needle design — holds max reading after release</li>
+              <li>Leak-free Ratchet Seal™ quick-connect chuck</li>
+              <li>100 PSI range — cars, trucks, motorcycles, bicycles</li>
+              <li>No battery required — fully mechanical</li>
+              <li>Premium carry pouch included</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0FNKGWW8H</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-value">$54.99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spacer -->
+      <div style="visibility:hidden;" class="product-card"></div>
+
+    </div><!-- /product-grid -->
+  </div><!-- /section Pressure Gauge -->
+
+
+  <!-- ─── SECTION: STAUN Deflators ─── -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-label-inner">
+        <div class="section-brand">STAUN</div>
+        <div class="section-name">Staun® Tire Deflators</div>
+      </div>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- Staun QuickSet -->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="images/Staun QS Main Image 30APR26 Mainmain V1.png" alt="Staun QuickSet Deflators 4-Pack" />
+        </div>
+        <div class="product-body">
+          <div class="product-series-row">
+            <span class="series-tag tag-staun">STAUN</span>
+            <span class="series-tag tag-deflator">Deflator</span>
+          </div>
+          <div class="product-name">Staun® QuickSet Tire Deflators<br/>4-Pack with Precision Gauge</div>
+          <div class="product-desc">
+            <ul>
+              <li>Set of 4 precision brass deflators</li>
+              <li>Built-in precision gauge — 6–30 PSI range</li>
+              <li>Auto-stops at target pressure</li>
+              <li>Premium suede carry/storage case included</li>
+              <li>Solid brass construction, Australian original</li>
+            </ul>
+          </div>
+          <div class="product-footer">
+            <div class="product-meta">ASIN: B0H1JT9R4J</div>
+            <div class="price-block">
+              <span class="price-label">Amazon Retail</span>
+              <span class="price-na">Currently Unavailable</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spacer -->
+      <div style="visibility:hidden;" class="product-card"></div>
+
+    </div><!-- /product-grid -->
+  </div><!-- /section STAUN -->
+
+
+</div><!-- /catalog-body -->
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="site-footer">
+  Procure Trading LLC &nbsp;|&nbsp; <a href="mailto:todd@procuretrading.com">todd@procuretrading.com</a> &nbsp;|&nbsp; Confidential — Distributor Use Only &nbsp;|&nbsp; May 2026
+  <div style="margin-top:8px; font-size:10px; color:#444;">Prices are subject to change without notice.</div>
+</footer>
+
+</body>
+</html>
